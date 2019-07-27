@@ -1,7 +1,8 @@
 ### Large file sorter
 
 Sorts large file lexicographically.
-Change CHUNK_LIMIT_BYTES to desired value.
+Use program arguments to specify file and chunk size in kilobytes. E.g. `"c:\temp\generated.txt" 20000`
+
 
 Algo:
 1. Split file into chunks of specified size
@@ -11,4 +12,5 @@ Algo:
 ### Large file generator
 Change GENERATED_FILE_PATH to desired path.
 
-Use generate(..) in main() with specified lines count and max line length. 
+Use program arguments to specify lines count, max line length and file path. 
+E.g. `100 100 "c:\temp\generated.txt"`
