@@ -12,7 +12,7 @@ import static ru.thecop.largesorter.FileUtils.createOrReplaceFile;
 
 class LargeFileGenerator {
     private static final Random random = new Random();
-    static final String GENERATED_FILE_PATH = "d:\\Temp\\genfile.txt";
+    static String GENERATED_FILE_PATH = null;
 
     private static final ArrayList<Character> ALLOWED_CHARS;
 
@@ -30,8 +30,19 @@ class LargeFileGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-//        generate(10000, 10000);//approx 45-50 mb
-        generate(20000, 20000);//approx 150-200 mb
+        if (args.length < 3) {
+            System.err.println("Specify lines count, max line length and file path. " +
+                    "Example: 100 100 \"c:\\temp\\generated.txt\"");
+            return;
+        }
+        int lineCount = Integer.valueOf(args[0]);
+        int maxLineLength = Integer.valueOf(args[1]);
+        GENERATED_FILE_PATH = args[2];
+        System.out.println("Generating " + lineCount
+                + " lines of max " + maxLineLength +
+                " length to file " + GENERATED_FILE_PATH);
+        generate(lineCount, maxLineLength);//10000+10000 = approx 45-50 mb
+        System.out.println("Done.");
     }
 
     private static void generate(int lineCount, int maxLineLength) throws IOException {
