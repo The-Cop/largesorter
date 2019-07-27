@@ -12,7 +12,7 @@ import static ru.thecop.largesorter.FileUtils.createOrReplaceFile;
 
 class LargeFileGenerator {
     private static final Random random = new Random();
-    static String GENERATED_FILE_PATH = null;
+    private static String GENERATED_FILE_PATH = null;
 
     private static final ArrayList<Character> ALLOWED_CHARS;
 

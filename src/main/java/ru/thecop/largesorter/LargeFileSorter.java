@@ -15,13 +15,22 @@ import java.util.List;
 import static ru.thecop.largesorter.FileUtils.createOrReplaceFile;
 
 class LargeFileSorter {
-    private static final long CHUNK_LIMIT_BYTES = 1024 * 1024 * 20; //20Mb
+    private static long CHUNK_LIMIT_BYTES = 1024 * 1024 * 20; //20Mb
     private static final String CHUNK_FILE_NAME = "chunk";
-    private static final String RESULT_FILE_NAME = "result.txt";
+    private static String RESULT_FILE_NAME = "result.txt";
+    private static String FILE_PATH = null;
 
 
     public static void main(String[] args) throws IOException {
-        Path path = Paths.get(LargeFileGenerator.GENERATED_FILE_PATH);
+        if (args.length < 2) {
+            System.err.println("Specify file path and max chunk size in kilobytes. " +
+                    "Example: \"c:\\temp\\generated.txt\" 20000");
+            return;
+        }
+        FILE_PATH = args[0];
+        CHUNK_LIMIT_BYTES = Long.valueOf(args[1]) * 1024;
+        System.out.println("Sorting file " + FILE_PATH + " with max chunk size " + CHUNK_LIMIT_BYTES + " bytes");
+        Path path = Paths.get(FILE_PATH);
         System.out.println("File size = " + Files.size(path) / 1024 + " kb");
         sortLargeFile(path);
     }
